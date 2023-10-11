@@ -1,8 +1,8 @@
 import numpy as np
 import sys
-channel_number_value = 5
-event_indicator_value = 3
-timestamp_value = 450359962737045
+channel_number_value = 2
+event_indicator_value = 0
+timestamp_value = 1803273693449
 # Define your channel number, event indicator, and timestamp
 channel_number = np.int32(channel_number_value)       # Assume channel_number_value is your value
 event_indicator = np.int32(event_indicator_value)     # Assume event_indicator_value is your value
@@ -37,8 +37,6 @@ print("Size of packed_data_bytes (bytes):", packed_data_bytes_size)
 
 # Store packed_data_bytes in a binary file
 with open("packed_data.bin", "wb") as binary_file:
-    binary_file.write(packed_data_bytes)
-    binary_file.write(packed_data_bytes)
     binary_file.write(packed_data_bytes)
 
 # Calculate the size of the binary file
