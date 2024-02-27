@@ -1,10 +1,11 @@
 """The TimeTagStream measurement class"""
 
-import TimeTagger
+import TimeTagger, time
 import numpy as np
 
-WRChannel = 8
+WRChannel = 3
 def subtract_WRtimestamps(channel, timestamps, WRChannel):
+    print("substraction function is running")
     # Initialize a variable to keep track of whether we're currently subtracting
     subtracting = False
     WR_timestamp = 0
@@ -14,6 +15,7 @@ def subtract_WRtimestamps(channel, timestamps, WRChannel):
             # If we find a new WRChannel, start subtracting from the next timestamps
             subtracting = True
             WR_timestamp = timestamps[i]
+            print("WR time tag appears at WR_timestamp = ",  WR_timestamp)
         elif subtracting:
             # Subtract the WR_timestamp from the timestamps
             timestamps[i] -= WR_timestamp
@@ -53,6 +55,7 @@ def data_compression(channel, timestamp, overflow_types, WRChannel):
 
 # Create a TimeTagger instance to control your hardware
 tagger = TimeTagger.createTimeTagger()
+virtual_tagger = TimeTagger.createTimeTaggerVirtual()
 
 # Enable the test signal on channels 1 and 2
 tagger.setTestSignal([1, 2], True) 
@@ -68,6 +71,10 @@ stream = TimeTagger.TimeTagStream(tagger=tagger,
                                   n_max_events=event_buffer_size,
                                   channels=[1, 2, WRChannel])
 
+time.sleep(5)
+print("will start streaming")
+stream.startFor(int(2E12))
+
 while stream.isRunning():
     data = stream.getData()
     if data.size == event_buffer_size:
@@ -82,6 +89,6 @@ while stream.isRunning():
         #reference the timestamps based on the WR time
         timestamps = subtract_WRtimestamps(channel, timestamps, WRChannel)
         packed_data_bytes_list = data_compression(channel=channel, timestamp=timestamps, overflow_types=overflow_types,WRChannel=WRChannel)
-        print("done")
+        print("done, data size is : ", data.size)
         
 

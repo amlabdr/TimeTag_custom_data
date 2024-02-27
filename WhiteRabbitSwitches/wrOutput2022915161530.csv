@@ -1,0 +1,14 @@
+,servo_state,meanDelay (ns),leader-follower delay (ns),round-trip delay (ns),delay asymetry (ns),delayCoefficient,ingressLatency (ns),egressLatency (ns),semistaticLatency (ns),offsetFromMaster (ns),phase setpoint (ns),skew (ns),UpdateCounter,leader_TX,leader_RX,follower_TX,follower_RX,FPGA,PLL,PSR,PSL
+0,          wri2,"441946.260
+","441947.589
+","884923.116
+","1.329
+",+0.000006014299999989 ,"258.471 
+","256.827 
+","0.000 
+","0.003 
+","-3.744 
+","0.001 
+","49783 
+",257.649,257.649,256.827,258.471,44.75,28.56,34.25,"36.44
+"

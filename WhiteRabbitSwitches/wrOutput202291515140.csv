@@ -1,0 +1,7 @@
+,servo_state,FPGA,PLL,PSR,PSL,Clock State,PLL State,UTCOffset,sw_time
+0,          wri2,44.75,28.50,34.19,"36.38
+",,,,
+1,          wri2,44.69,28.50,34.19,"36.38
+",BC    PLL locking state,"LOCKED  
+","+37.000010
+",2022-08-25 23:16:48.008764   TAI-UTC     

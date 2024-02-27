@@ -1,0 +1,9 @@
+,servo_state,meanDelay (ns),leader-follower delay (ns),round-trip delay (ns),delay asymetry (ns),phase setpoint (ns),skew (ns),leader_TX,leader_RX,FPGA,PLL,PSR,PSL
+0,          wri2,"441946.076
+","441947.405
+","884922.749
+","1.329
+","          -3.927 
+","           0.000 
+", , ,44.88,28.75,34.31,"36.50
+"

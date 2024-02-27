@@ -1,0 +1,17 @@
+,sw_time,UTCOffset,Clock State,PLL State,servo_state,meanDelay (ns),leader-follower delay (ns),round-trip delay (ns),delay asymetry (ns),delayCoefficient,ingressLatency (ns),egressLatency (ns),semistaticLatency (ns),offsetFromMaster (ns),phase setpoint (ns),skew (ns),UpdateCounter,leader_TX,leader_RX,follower_TX,follower_RX,FPGA,PLL,PSR,PSL
+0,2022-08-26 00:19:39.011630   TAI-UTC     ,"+37.000010
+",BC    PLL locking state,"LOCKED  
+"," TRACK_PHASE
+","441946.285
+","441947.614
+","884923.167
+","1.329
+",+0.000006014299999989 ,"258.471 
+","256.827 
+","0.000 
+","0.004 
+","-3.718 
+","0.001 
+","49873 
+",257.649,257.649,256.827,258.471,44.75,28.44,34.19,"36.44
+"

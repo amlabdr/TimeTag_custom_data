@@ -1,0 +1,40 @@
+name: 'Pym'
+IP: '10.21.1.20'
+serial: 1040677 # no use yet
+
+# White Rabbit
+WR_type: 'LEN'
+port: 'COM4'
+
+# time tagger
+TT_type: 'Multiharp'
+sync_rate: 1e5   # calibration signal
+
+resolution: 10 # in ps
+
+int_time: 1 # in sec
+number_ch: 8
+active_ch: [0, 1, 2, 3, 4] 
+input_delay: [0, 0, 0, 0, 0]
+threshold: [0.25, 0.25, 0.25, 0.25, 0.25]
+deadtime: [0, 0, 0, 0, 0]
+pps_chan: 2   
+clock: 3
+
+# for Multiharp:
+#0 = use internal clock
+#1 = use 10 MHz external clock
+#2 = White Rabbit master with generic partner
+#3 = White Rabbit slave with generic partner
+#4 = White Rabbit grand master with generic partner
+#5 = use 10 MHz + PPS from GPS receiver
+#6 = use 10 MHz + PPS + time via UART from GPS receiver
+#7 = White Rabbit master with MultiHarp as partner
+#8 = White Rabbit slave with MultiHarp as partner
+#9 = White Rabbit grand master with MultiHarp as partner 
+
+
+filename: 'test'
+directory: 'C:\\daq\\data\\test'
+
+    
