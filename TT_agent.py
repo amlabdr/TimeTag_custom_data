@@ -1,11 +1,12 @@
 import threading
 import TimeTagger
-import time
+import time, json
 import queue
 import numpy as np
 np.set_printoptions(suppress=True)
 from datetime import datetime
 from WhiteRabbitSwitches.LEN_lib import dev
+from coincidennces_analyze import Coincidences
 
 
 
@@ -18,7 +19,6 @@ class TT_agent:
         self.cur_pps, self.old_pps, self.cal_fac, self.old_cal_fac = 0, 0, 0, 0
     
     def ttSetTriggerLevel(self, levels : dict):
-        #levels : dict{channel:level}
         for channel in levels:
             self.tagger.setTriggerLevel(channel,levels[channel])
 
@@ -101,11 +101,11 @@ class TT_agent:
         thread.join()  # Wait for the thread to finish
 
 
-main_counter=0
 
+channels = [1,2,8]
 myTT_agent = TT_agent()
 myTT_agent.ttSetTriggerLevel({1:0.1,2:0.1})
-stream1 = myTT_agent.createStream([1, 2, 8])
+stream1 = myTT_agent.createStream(channels)
 stream_thread, data_queue = myTT_agent.startStreaming(stream1)
 
 stop_waiting = False
@@ -114,7 +114,7 @@ def stop_waiting_signal():
     stop_waiting = True
 
 print("s")
-# Main thread can check the queue for data
+
 
 try:
     while not stop_waiting:
@@ -122,23 +122,24 @@ try:
             data = data_queue.get(timeout=1)
             # Process the data or return it to the main function
             print("===========")
+            inner_dict_key = next(iter(data[1]))
+            coinc = Coincidences(data[1][inner_dict_key],data[2][inner_dict_key])
+            delay = coinc.findpeak()
+            print(delay)
+            coincidences_count = coinc.coincidences_count(delay)
+            print(coincidences_count)
             for ch in data:
                 inner_dict_key = next(iter(data[ch]))
                 array_size = len(data[ch][inner_dict_key])
                 print(f"Recived {array_size} elements for channel: {ch}")
-                print(data[ch])
-            main_counter+=1
+                #print(data[ch])
+                
         except queue.Empty:
             pass
 except KeyboardInterrupt:
-    print("stopping the main thread")
-    print("Stream stopped")
-    print("main counter:", main_counter)
     stop_waiting_signal()
 
-# Continue with other tasks
 # Stop the streaming thread when done
 myTT_agent.stopStreaming(stream1, stream_thread)
-print(myTT_agent.cur_pps, myTT_agent.old_pps, myTT_agent.cal_fac, myTT_agent.old_cal_fac)
 
 
